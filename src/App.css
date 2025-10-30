@@ -1,0 +1,57 @@
+@import "tailwindcss";
+/* border1 */
+.border-gradiant {
+  position: relative;
+  background: linear-gradient(90deg,#170D02cf 0%,#071A2C 70%) padding-box;
+  border-radius: 120px;
+  z-index: 10;
+}
+ 
+.border-gradiant::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from 30deg at 50% 15%,#9DE8EE 0deg,#9DE8EE 50deg,#FA7C0B 90deg,#9F8CED 140deg,#9F8CED 230deg,#FA7C0B 220deg,#9DE8EE 260deg);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+/* border2 */
+.border-2-gradiant {
+ position: relative;
+  background: linear-gradient(90deg,#170D02a0 0%,#071A2C 80%) padding-box;
+  border-radius: 120px;
+}
+ 
+.border-2-gradiant::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(270deg,#FA7C0B 0%,#071A2C 70%);;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+
+
+/* global */
+
+/* Plain CSS: make IBM Plex Sans Arabic the default everywhere */
+html, body, #root, * {
+  font-family: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  
+}
+
+/* Ensure form controls inherit it */
+button, input, textarea, select {
+  font: inherit;
+}

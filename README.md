@@ -1,56 +1,16 @@
-# KX Page — React + Vite + Tailwind (latest)
+# React + Vite
 
-A minimal React app scaffolded with Vite and styled using Tailwind CSS (latest). TypeScript is enabled by default.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Requirements
+Currently, two official plugins are available:
 
-- Node.js 18+ (LTS recommended)
-- npm 9+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Quick start
+## React Compiler
 
-```powershell
-# install dependencies
-npm install
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-# start dev server (http://localhost:5173 by default)
-npm run dev
+## Expanding the ESLint configuration
 
-# build for production
-npm run build
-
-# preview the production build
-npm run preview
-```
-
-## Tech stack
-
-- React 19
-- Vite 7
-- TypeScript 5
-- Tailwind CSS 4 (via @tailwindcss/postcss)
-
-## Project structure
-
-```text
-.
-├─ index.html
-├─ src/
-│  ├─ App.tsx
-│  ├─ main.tsx
-│  └─ index.css
-├─ vite.config.ts
-├─ tsconfig.json
-├─ postcss.config.js
-├─ tailwind.config.js
-└─ package.json
-```
-
-## Notes
-
-- Tailwind v4 uses a new PostCSS plugin. The config is set via `@tailwindcss/postcss` in `postcss.config.js`.
-- CSS utilities come from Tailwind via the directives in `src/index.css`.
-
-## License
-
-MIT
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
