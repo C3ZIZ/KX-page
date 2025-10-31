@@ -121,6 +121,8 @@ export default function Stakeholders({ cards = DEFAULT_CARDS, className = "" }) 
       aria-label="Stakeholders"
       className={[
         "w-full",
+        // force section to be at least 850px tall
+        "min-h-[840px]",
         // big section layout
         "flex items-center justify-center",
   // let height grow with content, use comfortable vertical padding

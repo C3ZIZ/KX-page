@@ -27,7 +27,7 @@ export default function Advances({
       className={[
         // Layout from Figma
         "w-full",
-        "flex flex-col items-center",
+        "flex flex-col",
         "min-h-[655px] md:h-[655px]",
         "px-[68px] py-[72px]",
         "gap-4", // 16px
