@@ -1,12 +1,22 @@
 import './App.css'
+import { Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage/HomePage'
+import KnowledgeAcademy from './pages/KnowledgeAcademy/KnowledgeAcademy'
 
 function App() {
   
 
   return (
     <>
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/academy" element={<KnowledgeAcademy />} />
+        {/* Optional placeholders for Navbar links during testing */}
+        <Route path="/about" element={<div className="text-white p-6">About page (placeholder)</div>} />
+        <Route path="/services" element={<div className="text-white p-6">Services page (placeholder)</div>} />
+        <Route path="/products" element={<div className="text-white p-6">Products page (placeholder)</div>} />
+        <Route path="/impact" element={<div className="text-white p-6">Impact page (placeholder)</div>} />
+      </Routes>
     </>
   )
 }
