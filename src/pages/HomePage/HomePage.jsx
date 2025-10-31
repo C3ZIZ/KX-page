@@ -3,6 +3,8 @@ import About from "./About";
 import Services from "./Services";
 import StartHere from "./StartHere";
 
+import Footer from "../../components/Footer"
+
 function HomePage() {
   
 
@@ -13,6 +15,8 @@ function HomePage() {
       <About />
       <Services />
       <StartHere />
+
+      <Footer />
     </div>
   )
 }
