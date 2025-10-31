@@ -1,5 +1,6 @@
 // src/components/Navbar.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 import contactBtn from "../assets/buttons/ContactUsButton.svg";
 import kxBtn from "../assets/buttons/KxAcademyButton.svg";
 
@@ -15,7 +16,7 @@ export default function Navbar({ active = "about" }) {
     <div className="w-[1204px]">
       {/* Border/Nav gradient outline */}
       <div
-        className="rounded-[40px] p-[1px]"
+  className="rounded-[40px] p-px"
         style={{
           background:
             "linear-gradient(94deg, #071A2C 24.12%, #FA7C0B 95.13%)",
@@ -42,8 +43,8 @@ export default function Navbar({ active = "about" }) {
                 const isActive = active === l.key;
                 return (
                   <li key={l.key}>
-                    <a
-                      href="#"
+                    <Link
+                      to={l.key === "about" ? "/about" : `/${l.key}`}
                       className={[
                         "text-[15px] leading-none transition-colors font-['IBM Plex Sans']",
                         isActive
@@ -52,7 +53,7 @@ export default function Navbar({ active = "about" }) {
                       ].join(" ")}
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}
@@ -75,8 +76,8 @@ export default function Navbar({ active = "about" }) {
               <span className="sr-only">Contact us</span>
             </a>
 
-            <a
-              href="#academy"
+            <Link
+              to="/academy"
               aria-label="KX Academy"
               title="KX Academy"
               className="cursor-pointer inline-flex"
@@ -87,7 +88,7 @@ export default function Navbar({ active = "about" }) {
                 className="h-10 w-auto select-none"
               />
               <span className="sr-only">KX Academy</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

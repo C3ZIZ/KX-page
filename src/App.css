@@ -55,3 +55,37 @@ html, body, #root, * {
 button, input, textarea, select {
   font: inherit;
 }
+
+/* Product pages specific styles */
+.product-h2 {
+  text-align: center;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 67.2px */
+}
+
+.product-h3 {
+  text-align: center;
+  font-size: 33px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 46.2px */
+}
+
+.product-button {
+  display: flex;
+  width: 350px;
+  height: 55px;
+  padding: 8px 14px 12px 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 40px;
+  color: #FFF;
+  text-align: center;
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 32.2px */
+}
