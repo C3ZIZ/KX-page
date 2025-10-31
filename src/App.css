@@ -1,4 +1,12 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 5px white, 0 0 10px #FA7C0B, 0 0 20px #FA7C0B, 0 0 40px #FA7C0B;
+  }
+}
+
+
 /* border1 */
 .border-gradiant {
   position: relative;
