@@ -20,6 +20,30 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
+
+/* Thin/card variant of the gradient border that preserves element's own border-radius
+   Use this on elements that already define their rounded corners (e.g. rounded-[40px])
+   so we only apply the colored border while keeping the original shape. */
+.card-border-colors {
+  position: relative;
+  z-index: 0;
+  /* keep background and border-radius controlled by the element (use inherit) */
+}
+
+.card-border-colors::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0px;
+  border-radius: inherit;
+  padding: 1px; /* border thickness */
+  background: conic-gradient(from 30deg at 50% 15%,#9DE8EE 0deg,#9DE8EE 50deg,#FA7C0B 90deg,#9F8CED 140deg,#9F8CED 230deg,#FA7C0B 220deg,#9DE8EE 260deg);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
 /* border2 */
 .border-2-gradiant {
  position: relative;
