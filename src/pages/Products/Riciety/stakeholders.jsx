@@ -1,5 +1,6 @@
 // src/components/stakeholders.jsx
 import React from "react";
+import DottedOverlay from "../../../components/DottedOverlay.jsx";
 
 /**
  * Reusable card
@@ -116,11 +117,14 @@ const DEFAULT_CARDS = [
 ];
 
 export default function Stakeholders({ cards = DEFAULT_CARDS, className = "" }) {
+
   return (
     <section
       aria-label="Stakeholders"
       className={[
         "w-full",
+        // allow absolute overlay inside
+        "relative",
         // force section to be at least 850px tall
         "min-h-[840px]",
         // big section layout
@@ -132,8 +136,12 @@ export default function Stakeholders({ cards = DEFAULT_CARDS, className = "" }) 
         "bg-[linear-gradient(94deg,rgba(23,13,2,0.57)_4.87%,#071A2C_75.88%)]",
         className,
       ].join(" ")}
+      
     >
-      <div className="flex flex-wrap md:flex-nowrap items-stretch md:justify-between justify-center gap-6">
+      {/* animated dotted overlay */}
+      <DottedOverlay />
+
+      <div className="relative z-10 flex flex-wrap md:flex-nowrap items-stretch md:justify-between justify-center gap-6">
         {cards.map((c, idx) => (
           <StakeholderCard key={idx} title={c.title} points={c.points} />
         ))}
