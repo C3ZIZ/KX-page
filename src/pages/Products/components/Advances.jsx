@@ -1,6 +1,34 @@
-import React from "react";
+// Advances.jsx
+// Purpose: Bulleted “Advances” section with optional nested sub-points and customizable bullet colors.
 
-export default function Advances({
+import React from "react";
+// 1) External libs first (react, router, antd, etc.)
+
+// 2) Internal/shared utilities next
+// (none)
+
+// 3) Local sibling/assets last
+// (none)
+
+// ------------------------------ Constants & Types ------------------------------
+// (none)
+
+/**
+ * @typedef {Object} AdvancesProps
+ * @property {string}        [title]            - Section heading.
+ * @property {Array<string|{text:string, subPoints?:string[]}>} [points]
+ * @property {string}        [className]        - Extra classes for the section.
+ * @property {string}        [titleClassName]   - Extra classes for the title.
+ * @property {string}        [listClassName]    - Extra classes for the <ul>.
+ * @property {string}        [bulletColor]      - CSS color for main bullets.
+ * @property {string}        [subBulletColor]   - CSS color for sub bullets.
+ */
+
+// ------------------------------ Helpers ---------------------------------------
+const isComplexPoint = (point) => typeof point === "object" && point?.text;
+
+// ------------------------------ Component -------------------------------------
+function Advances({
   title = "How This Product Advances Impact",
   points = [
     "Connects stakeholders across the value chain.",
@@ -14,9 +42,10 @@ export default function Advances({
   bulletColor = "#FDF3E8",
   subBulletColor = "#FDF3E8",
 }) {
-  // Helper to check if a point is a string or has sub-points
-  const isComplexPoint = (point) => typeof point === 'object' && point.text;
+  // --- Refs / State / Derived values / Callbacks ---
+  // (none needed: purely presentational)
 
+  // ------------------------------ Render --------------------------------------
   return (
     <section
       className={[
@@ -52,9 +81,9 @@ export default function Advances({
           ].join(" ")}
         >
           {points.map((p, i) => {
-            const isComplex = isComplexPoint(p);
-            const text = isComplex ? p.text : p;
-            const subPoints = isComplex ? p.subPoints : null;
+            const complex = isComplexPoint(p);
+            const text = complex ? p.text : p;
+            const subPoints = complex ? p.subPoints : null;
 
             return (
               <li
@@ -98,3 +127,9 @@ export default function Advances({
     </section>
   );
 }
+
+// Keep displayName for better DevTools
+Advances.displayName = "Advances";
+
+// Export memoized (safe: props-only presentational)
+export default React.memo(Advances);

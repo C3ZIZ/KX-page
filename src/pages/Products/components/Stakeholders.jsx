@@ -1,15 +1,59 @@
+// Stakeholders.jsx
+// Purpose: Stakeholders section with dotted background and three StakeholderCard items.
+
 import React from "react";
+// 1) External libs first (react, router, antd, etc.)
+
+// 2) Internal/shared utilities next
+// (none)
+
+// 3) Local sibling/assets last
 import DottedOverlay from "../../../components/DottedOverlay.jsx";
 
-export const StakeholderCard = ({
+// ------------------------------ Constants & Types ------------------------------
+// Default card data (visual content unchanged)
+const DEFAULT_CARDS = [
+  {
+    title: "For Universities",
+    points: ["Showcase active research.", "Attract partners and funding.", "Boost innovation reputation."],
+  },
+  {
+    title: "For Researchers",
+    points: ["Connect across institutions.", "Collaborate with peers and alumni.", "Gain visibility for your work."],
+  },
+  {
+    title: "For Donors and Investors",
+    points: ["See real opportunities early.", "Fund impactful research.", "Support innovation growth."],
+  },
+];
+
+/**
+ * @typedef {Object} StakeholderCardProps
+ * @property {string}   title
+ * @property {string[]} [points]
+ * @property {string}   [className]
+ * @property {string}   [titleClassName]
+ * @property {string}   [listClassName]
+ * @property {"compact"|"comfortable"|"spacious"} [density]
+ */
+
+/**
+ * @typedef {Object} StakeholdersProps
+ * @property {Array<{title:string, points:string[]}>} [cards]
+ * @property {string} [className]
+ */
+
+// ------------------------------ Subcomponent: StakeholderCard ------------------
+export const StakeholderCard = React.memo(function StakeholderCard({
   title,
   points = [],
   className = "",
   titleClassName = "",
   listClassName = "",
   density = "comfortable",
-}) => {
-  const styles = {
+}) {
+  // Density-to-class mapping (unchanged classes)
+  const DENSITY_MAP = {
     compact: {
       minH: "min-h-[400px]",
       pad: "pt-5 pr-6 pb-6 pl-6 md:pt-6",
@@ -28,8 +72,10 @@ export const StakeholderCard = ({
       title: "text-[24px] md:text-[26px] lg:text-[28px] leading-[1.45]",
       bullets: "text-[18px] md:text-[20px] lg:text-[22px] leading-[1.7] space-y-4 md:space-y-5",
     },
-  }[density] ?? styles?.comfortable;
+  };
+  const styles = DENSITY_MAP[density] ?? DENSITY_MAP.comfortable;
 
+  // ------------------------------ Render --------------------------------------
   return (
     <article
       className={[
@@ -68,36 +114,11 @@ export const StakeholderCard = ({
       </ul>
     </article>
   );
-};
+});
+StakeholderCard.displayName = "StakeholderCard";
 
-const DEFAULT_CARDS = [
-  {
-    title: "For Universities",
-    points: [
-      "Showcase active research.",
-      "Attract partners and funding.",
-      "Boost innovation reputation.",
-    ],
-  },
-  {
-    title: "For Researchers",
-    points: [
-      "Connect across institutions.",
-      "Collaborate with peers and alumni.",
-      "Gain visibility for your work.",
-    ],
-  },
-  {
-    title: "For Donors and Investors",
-    points: [
-      "See real opportunities early.",
-      "Fund impactful research.",
-      "Support innovation growth.",
-    ],
-  },
-];
-
-export default function Stakeholders({ cards = DEFAULT_CARDS, className = "" }) {
+// ------------------------------ Component: Stakeholders ------------------------
+function Stakeholders({ cards = DEFAULT_CARDS, className = "" }) {
   return (
     <section
       aria-label="Stakeholders"
@@ -122,3 +143,10 @@ export default function Stakeholders({ cards = DEFAULT_CARDS, className = "" }) 
     </section>
   );
 }
+
+// Keep displayName for better DevTools
+Stakeholders.displayName = "Stakeholders";
+
+// Export memoized (safe: props-driven presentational)
+export default React.memo(Stakeholders);
+

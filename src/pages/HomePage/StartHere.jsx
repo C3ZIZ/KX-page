@@ -1,6 +1,5 @@
 // src/components/StartHere.jsx
 // Purpose: “Start Here” section with title, subtitle, tri-field form (name, email, file upload), and a CTA.
-// Notes: keeps layout/styling intact; only structure/organization + comments. Filename/size shown + working delete.
 
 import React, { useRef, useState, useCallback } from "react";
 // 1) External libs first (react, router, antd, etc.)
@@ -9,7 +8,7 @@ import React, { useRef, useState, useCallback } from "react";
 // (none)
 
 // 3) Local sibling imports last
-import uploadIcon from "../../assets/upload-icon.svg"
+import uploadIcon from "../../assets/upload-icon.svg";
 
 // ------------------------------ Constants & Types ------------------------------
 const FORM_ACTION = "https://formspree.io/f/xanldyjo";
@@ -27,7 +26,8 @@ const formatBytes = (bytes) => {
   let i = 0;
   let n = bytes;
   while (n >= 1024 && i < units.length - 1) {
-    n /= 1024; i++;
+    n /= 1024;
+    i++;
   }
   return `${n.toFixed(n < 10 && i > 0 ? 1 : 0)} ${units[i]}`;
 };
@@ -60,9 +60,12 @@ function StartHere({ formAction = FORM_ACTION, className = "" }) {
     setFile(null);
   }, []);
 
-  const onKeyActivate = useCallback((e) => {
-    if (e.key === "Enter" || e.key === " ") openFileDialog(e);
-  }, [openFileDialog]);
+  const onKeyActivate = useCallback(
+    (e) => {
+      if (e.key === "Enter" || e.key === " ") openFileDialog(e);
+    },
+    [openFileDialog]
+  );
 
   // ------------------------------ Render --------------------------------------
   return (
@@ -85,14 +88,13 @@ function StartHere({ formAction = FORM_ACTION, className = "" }) {
 
       <div>
         <div className="px-20 pt-16 pb-10 mt-40 rounded-[80px]! before:p-0.2! border-gradiant">
-          <form
-            action={formAction}
-            method="POST"
-            className="z-100! relative "
-          >
+          <form action={formAction} method="POST" className="z-100! relative ">
             <div className=" relative z-100! flex flex-col md:flex-row items-center gap-3.5 p-6 rounded-lg text-white">
+              {/* Name */}
               <div className="flex flex-col w-full md:w-1/3">
-                <label htmlFor="name" className="mb-1 ml-4 text-xl font-semibold">Your Name</label>
+                <label htmlFor="name" className="mb-1 ml-4 text-xl font-semibold">
+                  Your Name
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -101,9 +103,15 @@ function StartHere({ formAction = FORM_ACTION, className = "" }) {
                   className="px-4 py-2 rounded-full bg-[#fdf2e9] text-black focus:outline-none"
                 />
               </div>
-              <div className="h-12 -mb-6 border-l-2 border-l-[#F3B572]"/>
+
+              {/* Divider */}
+              <div className="h-12 -mb-6 border-l-2 border-l-[#F3B572]" />
+
+              {/* Email */}
               <div className="flex flex-col w-full md:w-1/3">
-                <label htmlFor="email" className="mb-1 ml-4 text-xl font-semibold">Your Email</label>
+                <label htmlFor="email" className="mb-1 ml-4 text-xl font-semibold">
+                  Your Email
+                </label>
                 <input
                   type="email"
                   id="email"
@@ -112,7 +120,11 @@ function StartHere({ formAction = FORM_ACTION, className = "" }) {
                   className="px-4 py-2 rounded-full bg-[#fdf2e9] text-black focus:outline-none"
                 />
               </div>
-              <div className="h-12 -mb-6 border-l-2 border-l-[#F3B572]"/>
+
+              {/* Divider */}
+              <div className="h-12 -mb-6 border-l-2 border-l-[#F3B572]" />
+
+              {/* File upload */}
               <div className="flex flex-col w-full md:w-1/3">
                 <label className="mb-1 ml-4 text-xl font-semibold">Your research abstract</label>
 
@@ -129,12 +141,9 @@ function StartHere({ formAction = FORM_ACTION, className = "" }) {
                   {file ? (
                     <div className="flex items-center justify-center">
                       <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[90%]">
-                        
                         {file.name}
                       </span>
-                      <span className="ml-2 opacity-90 text-sm">
-                        ({formatBytes(file.size)})
-                      </span>
+                      <span className="ml-2 opacity-90 text-sm">({formatBytes(file.size)})</span>
                       <button
                         type="button"
                         onClick={clearFile}
@@ -170,6 +179,7 @@ function StartHere({ formAction = FORM_ACTION, className = "" }) {
               </div>
             </div>
 
+            {/* Submit */}
             <div className="flex justify-end mt-4">
               <button className="text-white cursor-pointer px-6 py-2.5 border-3-gradiant" type="submit">
                 Submit
@@ -178,6 +188,7 @@ function StartHere({ formAction = FORM_ACTION, className = "" }) {
           </form>
         </div>
 
+        {/* Secondary CTA */}
         <div className="flex justify-center mt-8">
           <button className="cursor-pointer text-xl! text-white px-8 py-3 border-gradiant">
             Explore more products

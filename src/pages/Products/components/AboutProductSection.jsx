@@ -1,6 +1,31 @@
-import React from "react";
+// AboutProductSection.jsx
+// Purpose: Product “about” section with created year, title, multi-paragraph body, and a right-aligned stat block.
 
-export default function AboutProductSection({
+
+import React from "react";
+// 1) External libs first (react, router, antd, etc.)
+
+// 2) Internal/shared utilities next
+// (none)
+
+// 3) Local sibling/assets last
+// (none)
+
+// ------------------------------ Constants & Types ------------------------------
+// (none)
+
+/**
+ * @typedef {Object} AboutProductSectionProps
+ * @property {string}   [createdAt='2024']       - Year or date string shown under "Created at".
+ * @property {string}   [title]                  - Section title text.
+ * @property {string[]} [paragraphs]             - Array of body paragraphs.
+ * @property {string}   [statNumber='0.000']     - Highlighted statistic number.
+ * @property {string}   [statLabel='Active users'] - Label for the highlighted statistic.
+ * @property {string}   [className]              - Optional extra classes for the inner container.
+ */
+
+// ------------------------------ Component -------------------------------------
+function AboutProductSection({
   createdAt = "2024",
   title = "Product description title.",
   paragraphs = [
@@ -11,13 +36,17 @@ export default function AboutProductSection({
   statLabel = "Active users",
   className = "",
 }) {
+  // --- Refs / State / Derived values / Callbacks ---
+  // (none needed: purely presentational)
+
+  // ------------------------------ Render --------------------------------------
   return (
     <section className={`w-full bg-[#071C2F]`} aria-label="About product">
       <div
         className={`mx-auto max-w-[1440px] flex flex-col justify-end items-center gap-8 p-[68px] ${className}`}
       >
         {/* Created at */}
-  <div className="h-20 flex flex-col justify-center self-stretch">
+        <div className="h-20 flex flex-col justify-center self-stretch">
           <p className="text-[#EF9C43] font-normal text-[33px] leading-[46.2px] font-['IBM Plex Sans Arabic']">
             Created at {createdAt}
           </p>
@@ -42,7 +71,7 @@ export default function AboutProductSection({
           </div>
           <div
             className="h-[45px] self-stretch text-center font-['IBM Plex Sans'] text-[23px] font-bold leading-[140%]"
-            style={{ color: 'var(--Primary-400, #EF9C43)' }}
+            style={{ color: "var(--Primary-400, #EF9C43)" }}
           >
             {statLabel}
           </div>
@@ -51,3 +80,9 @@ export default function AboutProductSection({
     </section>
   );
 }
+
+// Keep displayName for better DevTools
+AboutProductSection.displayName = "AboutProductSection";
+
+// Export memoized (safe: props-only presentational)
+export default React.memo(AboutProductSection);

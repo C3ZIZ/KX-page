@@ -1,11 +1,33 @@
-import React from 'react'
-import Footer from '../../../components/Footer'
-import ProductHero from '../components/ProductHero'
-import AboutProductSection from '../components/AboutProductSection'
-import Stakeholders from '../components/Stakeholders'
-import Advances from '../components/Advances'
+// Riciety.jsx
+// Purpose: Product landing page for "Riciety" combining hero, about, stakeholders, advances, and footer sections.
 
+import React from "react";
+// 1) External libs first (react, router, antd, etc.)
+
+// 2) Internal/shared utilities next
+// (none)
+
+// 3) Local sibling/assets last
+import Footer from "../../../components/Footer";
+import ProductHero from "../components/ProductHero";
+import AboutProductSection from "../components/AboutProductSection";
+import Stakeholders from "../components/Stakeholders";
+import Advances from "../components/Advances";
+
+// ------------------------------ Constants & Types ------------------------------
+// (none)
+
+/**
+ * @typedef {Object} RicietyProps
+ * @property {string} [pageTitle='Riciety'] - Title passed to the hero section.
+ */
+
+// ------------------------------ Component -------------------------------------
 function Riciety({ pageTitle = "Riciety" }) {
+  // --- Refs / State / Derived values / Callbacks ---
+  // (none needed: page comp composes child sections)
+
+  // ------------------------------ Render --------------------------------------
   return (
     <div className="w-full min-h-screen bg-[#071A2C] text-white overflow-x-hidden">
       <ProductHero
@@ -19,10 +41,12 @@ function Riciety({ pageTitle = "Riciety" }) {
       {/* About product section (below the hero) */}
       <AboutProductSection
         createdAt="2023"
-        title={'Riciety is a white-label digital platform designed for universities, investors, and donors who want to maximize academic research impact.'}
+        title={
+          "Riciety is a white-label digital platform designed for universities, investors, and donors who want to maximize academic research impact."
+        }
         paragraphs={[
           "It empowers Technology Transfer Offices (TTOs) to manage research challenges, engage alumni and industrial partners, and secure funding through donations, investments, and collaborations.",
-          "For investors and donors, Riciety provides instant access to a curated pipeline of impactful research opportunities, open visibility in monitoring progress, quantifiable economic and social returns, and assurance every investment produces innovation with purpose and value."
+          "For investors and donors, Riciety provides instant access to a curated pipeline of impactful research opportunities, open visibility in monitoring progress, quantifiable economic and social returns, and assurance every investment produces innovation with purpose and value.",
         ]}
         statNumber="10,000+"
         statLabel="Number of users"
@@ -58,20 +82,24 @@ function Riciety({ pageTitle = "Riciety" }) {
         ]}
       />
 
-  {/* Advances section: how Riciety advances open research */}
-  <Advances 
-    title="How Riciety Advances Open Research"
-    points={[
-      "Builds bridges between researchers, institutions, and alumni.",
-      "Opens new channels for collaboration and shared discovery.",
-      "Promotes transparency in research progress and impact.",
-      "Gives funders the insight to invest where it matters most.",
-    ]}
-  />
+      {/* Advances section: how Riciety advances open research */}
+      <Advances
+        title="How Riciety Advances Open Research"
+        points={[
+          "Builds bridges between researchers, institutions, and alumni.",
+          "Opens new channels for collaboration and shared discovery.",
+          "Promotes transparency in research progress and impact.",
+          "Gives funders the insight to invest where it matters most.",
+        ]}
+      />
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Riciety
+// Keep displayName for better DevTools
+Riciety.displayName = "Riciety";
+
+// Export memoized (safe: props-only page shell)
+export default React.memo(Riciety);

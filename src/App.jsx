@@ -20,11 +20,11 @@ function App() {
         <Route path="/academy" element={<KnowledgeAcademy />} />
         {/* Optional placeholders for Navbar links during testing */}
         <Route path="/about" element={<div className="text-white p-6">About page (placeholder)</div>} />
-  <Route path="/services" element={<ServicesPage />} />
-  <Route path="/products" element={<Products />} />
-  <Route path="/products/riciety" element={<Riciety />} />
-  <Route path="/products/spinx" element={<Spinx />} />
-  <Route path="/products/kore" element={<Kore />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/riciety" element={<Riciety />} />
+        <Route path="/products/spinx" element={<Spinx />} />
+        <Route path="/products/kore" element={<Kore />} />
         <Route path="/impact" element={<div className="text-white p-6">Impact page (placeholder)</div>} />
       </Routes>
     </>

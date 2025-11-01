@@ -1,6 +1,5 @@
 // src/components/Footer.jsx
 // Purpose: Site footer with brand, newsletter subscribe, link columns, and social icons.
-// Notes: keeps layout/styling intact; only structure/organization + comments.
 
 import React, { useState, useCallback } from "react";
 // 1) External libs first (react, router, antd, etc.)
@@ -32,7 +31,7 @@ const BG_DARK = "#170D02";
  */
 
 // ------------------------------ Component -------------------------------------
-export default function Footer({
+function Footer({
   brand = "Knowledgex",
   tagline = "Driving deep-tech innovation across the entire value chain: Academia, Industry, Investors",
   quickLinks = [
@@ -52,14 +51,8 @@ export default function Footer({
   onSubscribe,
   className = "",
 }) {
-  // --- Refs (DOM or instance) ---
-  // (none)
-
   // --- State (primitive first, complex later) ---
   const [email, setEmail] = useState("");
-
-  // --- Derived values (useMemo for expensive work) ---
-  // (none)
 
   // --- Callbacks (stable handlers for children/antd) ---
   const handleEmailChange = useCallback((e) => setEmail(e.target.value), []);
@@ -71,28 +64,14 @@ export default function Footer({
     [onSubscribe, email]
   );
 
-  // --- Effects (subscribe/unsubscribe, focus, synchs) ---
-  // (none)
-
-  // --- Render helpers (pure, no side effects) ---
-  // (none)
-
   // ------------------------------ Render --------------------------------------
   // NOTE: JSX markup & classNames are preserved; only reordered/organized in the code file.
   return (
-    <footer
-      className={`w-full ${className} border-gradiant-no-bg`}
-      aria-label="Site footer"
-    >
-      {/* If inside a centered/narrow parent, this forces full viewport width */}
-
+    <footer className={`w-full ${className} border-gradiant-no-bg`} aria-label="Site footer">
       {/* canvas */}
-      <div
-        className="rounded-none box-border px-[72px] py-10 relative z-10"
-        style={{ background: BG_DARK }}
-      >
+      <div className="rounded-none box-border px-[72px] py-10 " style={{ background: BG_DARK }}>
         {/* top row */}
-        <div className="flex flex-wrap items-start justify-between gap-10">
+        <div className="flex flex-wrap items-start justify-between gap-10 relative z-10">
           {/* left block */}
           <div className="max-w-[640px]">
             <h3 className="text-white font-bold leading-[1.4] text-[33px] font-['IBM Plex Sans']">
@@ -103,23 +82,13 @@ export default function Footer({
             </p>
 
             {/* newsletter */}
-            <form
-              onSubmit={handleSubscribe}
-              className="mt-12 flex items-center gap-3"
-              noValidate
-            >
+            <form onSubmit={handleSubscribe} className="mt-12 flex items-center gap-3" noValidate>
               {/* input pill */}
               <label
                 htmlFor="footer-email"
                 className="flex items-center gap-3 rounded-full h-[52px] min-w-[320px] w-[520px] bg-[#FDF3E8] pl-5 pr-4"
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path
                     d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 0l8 6 8-6"
                     stroke="#888D93"
@@ -134,7 +103,7 @@ export default function Footer({
                   value={email}
                   onChange={handleEmailChange}
                   placeholder="Enter your E-mail for updates on our latest innovations"
-                  className="w-full h-full bg-transparent outline-none placeholder:text-[#888D93] text-[#170D02] text-[14px]"
+                  className="w-full h-full bg-transparent outline-none placeholder:text[#888D93] text-[#170D02] text-[14px]"
                 />
               </label>
 
@@ -160,14 +129,13 @@ export default function Footer({
           <div
             className="h-px w-full -mt-4 rounded"
             style={{
-              background:
-                "linear-gradient(90deg, #9DE8EE 0%, #FA7C0B 50%, #9F8CED 100%)",
+              background: "linear-gradient(90deg, #9DE8EE 0%, #FA7C0B 50%, #9F8CED 100%)",
             }}
           />
         </div>
 
         {/* bottom row */}
-        <div className="mt-4 flex w-full items-center justify-between">
+        <div className="mt-4 flex w-full items-center justify-between relative z-10">
           <div className="flex items-center gap-4">
             <span className="text-white">Follow us</span>
             <a
@@ -229,3 +197,7 @@ function Column({ title, items }) {
 // Keep displayName for better DevTools
 Footer.displayName = "Footer";
 Column.displayName = "Footer.Column";
+
+// Export memoized (safe: props-driven presentational component)
+export default React.memo(Footer);
+

@@ -1,6 +1,37 @@
+// ProductHero.jsx
+// Purpose: Product page hero with background image, centered navbar, and CTA block.
+
+import React from "react";
+// 1) External libs first (react, router, antd, etc.)
+
+// 2) Internal/shared utilities next
+// (none)
+
+// 3) Local sibling/assets last
 import homeBackground from "../../../assets/bg2.svg";
 import Navbar from "../../../components/Navbar";
+import landingWebm from "../../../assets/videos/LandingpageKx.webm";
+import landingMp4 from "../../../assets/videos/LandingpageKx.mp4";
+import VideoBackground from "../../../components/VideoBackground";
 
+// ------------------------------ Constants & Types ------------------------------
+// Keep constants near top; name in ALL_CAPS if static.
+const HOME_BG_STYLE = {
+  backgroundImage: `url(${homeBackground})`,
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+};
+
+/**
+ * @typedef {Object} ProductHeroProps
+ * @property {string} [title="Product Title"]        - Main headline.
+ * @property {string} [subtitle="Product Tagline"]   - Optional subheading.
+ * @property {string} [description="Short description goes here."] - Optional description.
+ * @property {string} [buttonLabel="Learn More"]     - CTA button label (omit to hide).
+ * @property {string} [buttonHref="#"]               - CTA link href.
+ */
+
+// ------------------------------ Component -------------------------------------
 function ProductHero({
   title = "Product Title",
   subtitle = "Product Tagline",
@@ -8,20 +39,12 @@ function ProductHero({
   buttonLabel = "Learn More",
   buttonHref = "#",
 }) {
-  const HOME_BG_STYLE = {
-    backgroundImage: `url(${homeBackground})`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-  };
+  // --- Refs / State / Derived values / Callbacks ---
+  // (none needed: presentational component)
 
+  // ------------------------------ Render --------------------------------------
   return (
-    <section
-      className="relative w-full bg-no-repeat bg-cover overflow-hidden"
-      style={HOME_BG_STYLE}
-      dir="ltr"
-      role="banner"
-      aria-label="Product hero"
-    >
+   <VideoBackground poster={homeBackground} webm={landingWebm} mp4={landingMp4} ariaLabel="Product hero">
       {/* Center the navbar to match its fixed width */}
       <div className="w-full flex justify-center pt-12">
         <Navbar active="products" />
@@ -32,13 +55,9 @@ function ProductHero({
         <div className="mx-auto max-w-4xl">
           <h1 className="text-6xl text-white font-bold">{title}</h1>
 
-          {subtitle && (
-            <h2 className="product-h2 mt-5">{subtitle}</h2>
-          )}
+          {subtitle && <h2 className="product-h2 mt-5">{subtitle}</h2>}
 
-          {description && (
-            <h3 className="product-h3 my-5">{description}</h3>
-          )}
+          {description && <h3 className="product-h3 my-5">{description}</h3>}
 
           {buttonLabel && (
             <a href={buttonHref}>
@@ -49,8 +68,12 @@ function ProductHero({
           )}
         </div>
       </div>
-    </section>
+    </VideoBackground>
   );
 }
 
-export default ProductHero;
+// Keep displayName for better DevTools
+ProductHero.displayName = "ProductHero";
+
+// Export memoized (safe: props-only presentational)
+export default React.memo(ProductHero);

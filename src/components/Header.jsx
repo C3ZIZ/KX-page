@@ -1,6 +1,5 @@
 // src/components/Header.jsx
 // Purpose: Top navigation bar with brand, primary links, and two CTAs.
-// Notes: keeps layout/styling intact; only structure/organization + comments.
 
 import React from "react";
 // 1) External libs first (react, router, antd, etc.)

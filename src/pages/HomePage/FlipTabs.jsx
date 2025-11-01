@@ -1,12 +1,16 @@
+// FlipTabs.jsx
+// Purpose: Interactive horizontal “flip & expand” tabs that rotate labels when collapsed and expand with animated content.
+
 import React, { useCallback, useMemo, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useReducedMotion,
-} from "framer-motion";
+// 1) External libs first (react, router, antd, etc.)
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+// 2) Internal/shared utilities next
+// (none)
+// 3) Local sibling/assets last
 import imgPlaceholder from "../../assets/product-3-img.svg"; // Replace if needed
 
-// ---------- DATA (unchanged) ----------
+// ------------------------------ Constants & Types ------------------------------
+// Data model (unchanged visual content)
 const panels = [
   {
     id: 1,
@@ -36,14 +40,17 @@ const panels = [
   },
 ];
 
-// ---------- STABLE REFS (avoid new objects each render) ----------
+// Stable style objects and transitions (avoid new objects per render)
 const PERSPECTIVE_STYLE = { perspective: 1000 };
 const PRESERVE_3D = { transformStyle: "preserve-3d" };
 const BACKFACE_HIDDEN = { backfaceVisibility: "hidden" };
 const SPRING = { type: "spring", stiffness: 260, damping: 28 };
 const TWEEN = { duration: 0.5, type: "tween" };
 
-// Variants factory so we respect prefers-reduced-motion
+/**
+ * Returns framer-motion variants depending on prefers-reduced-motion.
+ * @param {boolean} reduced
+ */
 const makeContentVariants = (reduced) =>
   reduced
     ? {
@@ -57,7 +64,7 @@ const makeContentVariants = (reduced) =>
         exit: { opacity: 0, y: 20, rotateY: -10 },
       };
 
-// ---------- CHILD (memoized to minimize re-renders) ----------
+// ------------------------------ Child Item ------------------------------------
 const PanelItem = React.memo(function PanelItem({
   panel,
   isActive,
@@ -99,9 +106,7 @@ const PanelItem = React.memo(function PanelItem({
             <div className="bg-orange-500 text-black text-base font-bold w-9 h-9 rounded-full flex items-center justify-center">
               {String(panel.id).padStart(2, "0")}
             </div>
-            <h3 className="text-xl font-semibold whitespace-nowrap">
-              {panel.title}
-            </h3>
+            <h3 className="text-xl font-semibold whitespace-nowrap">{panel.title}</h3>
           </div>
 
           <AnimatePresence mode="wait" initial={false}>
@@ -118,13 +123,9 @@ const PanelItem = React.memo(function PanelItem({
               role="region"
               aria-label={`${panel.title} details`}
             >
-              <h2 className="text-3xl font-bold mb-4 leading-snug">
-                {panel.subtitle}
-              </h2>
+              <h2 className="text-3xl font-bold mb-4 leading-snug">{panel.subtitle}</h2>
 
-              <p className="text-base text-gray-300 leading-relaxed max-w-xl">
-                {panel.content}
-              </p>
+              <p className="text-base text-gray-300 leading-relaxed max-w-xl">{panel.content}</p>
 
               {panel.image && (
                 <div className="mt-6 bg-[#0B1226] p-4 rounded-[20px] border border-[#2A2F45]">
@@ -150,34 +151,30 @@ const PanelItem = React.memo(function PanelItem({
             {String(panel.id).padStart(2, "0")}
           </div>
           <div className="absolute bottom-2 h-40 w-40">
-            <h2 className="text-3xl text-white -rotate-90 whitespace-nowrap">
-              {panel.title}
-            </h2>
+            <h2 className="text-3xl text-white -rotate-90 whitespace-nowrap">{panel.title}</h2>
           </div>
         </div>
       )}
     </motion.div>
   );
 });
+PanelItem.displayName = "PanelItem";
 
-export default function FlipTabs() {
+// ------------------------------ Component -------------------------------------
+function FlipTabs() {
   const [active, setActive] = useState(1);
   const reduced = useReducedMotion();
 
   // Stable handler reference
-  const toggleActive = useCallback(
-    (id) => {
-      setActive((prev) => (prev === id ? null : id));
-    },
-    []
-  );
+  const toggleActive = useCallback((id) => {
+    setActive((prev) => (prev === id ? null : id));
+  }, []);
 
   // Variants computed once per reduced-motion state
-  const contentVariants = useMemo(
-    () => makeContentVariants(reduced),
-    [reduced]
-  );
+  const contentVariants = useMemo(() => makeContentVariants(reduced), [reduced]);
 
+  // ------------------------------ Render --------------------------------------
+  // NOTE: JSX markup & classNames are preserved exactly as provided.
   return (
     <div
       className="flex w-full h-[520px] md:h-[600px] p-6 gap-4 text-white"
@@ -196,3 +193,10 @@ export default function FlipTabs() {
     </div>
   );
 }
+
+// Keep displayName for better DevTools
+FlipTabs.displayName = "FlipTabs";
+
+// Export memoized (safe: internal state only; prevents parent re-renders from bubbling unnecessarily)
+export default React.memo(FlipTabs);
+

@@ -1,18 +1,30 @@
+// DottedOverlay.jsx
+// Purpose: Absolute-positioned <canvas> overlay that renders an animated dotted grid reacting to cursor/touch.
+
 import React, { useEffect, useRef } from "react";
+// 1) External libs first (react, router, antd, etc.)
+
+// 2) Internal/shared utilities next
+// (none)
+
+// 3) Local sibling/assets last
+// (none)
+
+// ------------------------------ Constants & Types ------------------------------
+// Keep constants near top; name in ALL_CAPS if static.
+// (none)
 
 /**
- * DottedOverlay
- * Absolute-positioned canvas that renders an animated dotted grid.
- * Place inside a relatively positioned container.
- *
- * Props:
- * - spacing: number (px between dots) default 24
- * - baseRadius: number (dot radius in px) default 1.2
- * - color: string (CSS color) default rgba(253,243,232,0.35)
- * - scaleNear: number (scale when near cursor) default 2
- * - lerpFactor: number (0..1 easing) default 0.2
- * - className: string for canvas classes
+ * @typedef {Object} DottedOverlayProps
+ * @property {number}  [spacing=24]        - Distance between dots in px.
+ * @property {number}  [baseRadius=1.2]    - Base dot radius in px.
+ * @property {string}  [color='rgba(253,243,232,0.35)'] - Dot color.
+ * @property {number}  [scaleNear=2]       - Scale factor when dot is near the cursor.
+ * @property {number}  [lerpFactor=0.2]    - Interpolation factor (0..1) for easing motion/scale.
+ * @property {string}  [className='absolute inset-0 z-0 pointer-events-none'] - Classes applied to canvas.
  */
+
+// ------------------------------ Component -------------------------------------
 export default function DottedOverlay({
   spacing = 24,
   baseRadius = 1.2,
@@ -38,6 +50,7 @@ export default function DottedOverlay({
     let mouse = { x: 0, y: 0 };
     let mouseOver = false;
 
+    // --- Dot primitive ---
     class Dot {
       constructor() {
         this.x = 0; // animated offset x
@@ -63,6 +76,7 @@ export default function DottedOverlay({
       }
     }
 
+    // --- Layout / DPR sizing ---
     const resize = () => {
       const rect = container.getBoundingClientRect();
       const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
@@ -75,6 +89,7 @@ export default function DottedOverlay({
       cols = Math.max(1, Math.floor(rect.width / spacing));
       rows = Math.max(1, Math.floor(rect.height / spacing));
 
+      // Center the grid within the container
       const startX = ((rect.width % spacing) / 2) + spacing / 2;
       const startY = ((rect.height % spacing) / 2) + spacing / 2;
 
@@ -92,6 +107,7 @@ export default function DottedOverlay({
       if (signs.length > cols) signs.length = cols;
     };
 
+    // --- Pointer handling (attached to container; canvas is pointer-events: none) ---
     const onMove = (e) => {
       const rect = container.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -119,6 +135,7 @@ export default function DottedOverlay({
       }
     };
 
+    // --- Animation helpers ---
     const lerp = (a, b, t) => a + (b - a) * t;
 
     const calculateTargets = () => {
@@ -159,11 +176,11 @@ export default function DottedOverlay({
       frameId = requestAnimationFrame(draw);
     };
 
+    // --- Wire up observers & events ---
     const ro = new ResizeObserver(resize);
     ro.observe(container);
     resize();
 
-    // attach to container so canvas remains pointer-events none
     container.addEventListener("mousemove", onMove, { passive: true });
     container.addEventListener("touchmove", onMove, { passive: true });
     container.addEventListener("mouseenter", onEnter, { passive: true });
@@ -173,6 +190,7 @@ export default function DottedOverlay({
 
     frameId = requestAnimationFrame(draw);
 
+    // --- Cleanup ---
     return () => {
       cancelAnimationFrame(frameId);
       ro.disconnect();
@@ -185,5 +203,18 @@ export default function DottedOverlay({
     };
   }, [baseRadius, color, lerpFactor, scaleNear, spacing]);
 
+  // ------------------------------ Render --------------------------------------
+  // NOTE: Markup & className preserved; the canvas paints the dotted overlay.
   return <canvas ref={canvasRef} aria-hidden="true" className={className} />;
 }
+
+// Keep displayName for better DevTools
+DottedOverlay.displayName = "DottedOverlay";
+
+/*
+  Dev notes:
+  - Canvas is DPI-aware (DPR capped at 2 for perf) and resizes to its parent via ResizeObserver.
+  - Events are attached to the container to keep the canvas pointer-events: none.
+  - Tuning tips (non-breaking): increase spacing for fewer dots, lower lerpFactor for snappier motion,
+    or tweak scaleNear for a stronger “react-to-cursor” emphasis.
+*/

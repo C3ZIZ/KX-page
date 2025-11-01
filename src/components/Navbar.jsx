@@ -1,6 +1,5 @@
 // src/components/Navbar.jsx
 // Purpose: Top navigation bar with brand, primary links, and two CTA buttons.
-// Notes: keeps layout/styling intact; only structure/organization + comments.
 
 import React from "react";
 import { Link } from "react-router-dom";
