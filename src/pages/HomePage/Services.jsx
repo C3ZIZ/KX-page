@@ -1,4 +1,4 @@
-import DottedMesh from "../../components/dottedMesh";
+import DottedMesh from "../../components/DottedMesh";
 
 function Services() {
   
