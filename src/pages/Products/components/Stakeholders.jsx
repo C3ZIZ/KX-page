@@ -1,22 +1,13 @@
-// src/components/stakeholders.jsx
 import React from "react";
 import DottedOverlay from "../../../components/DottedOverlay.jsx";
 
-/**
- * Reusable card
- * Props:
- * - title: string
- * - points: string[]
- * - className, titleClassName, listClassName: optional overrides
- */
-// src/components/stakeholders.jsx  — replace only StakeholderCard
 export const StakeholderCard = ({
   title,
   points = [],
   className = "",
   titleClassName = "",
   listClassName = "",
-  density = "comfortable", // compact | comfortable | spacious
+  density = "comfortable",
 }) => {
   const styles = {
     compact: {
@@ -27,7 +18,6 @@ export const StakeholderCard = ({
     },
     comfortable: {
       minH: "min-h-[468px] md:min-h-[490px] lg:min-h-[511px]",
-      // Figma padding: 68px 68px 68px 24px (we keep L=24px feel on lg)
       pad: "pt-8 pr-8 pb-8 pl-6 md:pt-10 md:pr-10 md:pb-10 md:pl-6 lg:pt-[68px] lg:pr-[68px] lg:pb-[68px] lg:pl-6",
       title: "text-[22px] md:text-[24px] lg:text-[28px] leading-[1.4]",
       bullets: "text-[17px] md:text-[18px] lg:text-[20px] leading-[1.6] space-y-3 md:space-y-4",
@@ -44,11 +34,10 @@ export const StakeholderCard = ({
     <article
       className={[
         "flex flex-col items-start",
-        // responsive width; exact Figma width on md+
         "w-full md:w-[377px]",
-        styles.minH,                // comfortable vertical size
-        styles.pad,                 // generous vertical padding
-  "rounded-[40px] card-border-colors",
+        styles.minH,
+        styles.pad,
+        "rounded-[40px] card-border-colors",
         "bg-[linear-gradient(94deg,rgba(23,13,2,0.57)_4.87%,#071A2C_75.88%)]",
         className,
       ].join(" ")}
@@ -64,7 +53,6 @@ export const StakeholderCard = ({
         {title}
       </h3>
 
-      {/* exactly 32px below the title */}
       <ul
         className={[
           "w-full text-left list-disc pl-6 mt-8",
@@ -82,13 +70,6 @@ export const StakeholderCard = ({
   );
 };
 
-
-/**
- * Section wrapper
- * Props:
- * - cards: { title: string, points: string[] }[]
- * - className: optional wrapper override
- */
 const DEFAULT_CARDS = [
   {
     title: "For Universities",
@@ -117,28 +98,20 @@ const DEFAULT_CARDS = [
 ];
 
 export default function Stakeholders({ cards = DEFAULT_CARDS, className = "" }) {
-
   return (
     <section
       aria-label="Stakeholders"
       className={[
         "w-full",
-        // allow absolute overlay inside
         "relative",
-        // force section to be at least 850px tall
         "min-h-[840px]",
-        // big section layout
         "flex items-center justify-center",
-  // let height grow with content, use comfortable vertical padding
-  "gap-6",
-  "py-14 px-6 md:px-[68px]",
-        // gradient background
+        "gap-6",
+        "py-14 px-6 md:px-[68px]",
         "bg-[linear-gradient(94deg,rgba(23,13,2,0.57)_4.87%,#071A2C_75.88%)]",
         className,
       ].join(" ")}
-      
     >
-      {/* animated dotted overlay */}
       <DottedOverlay />
 
       <div className="relative z-10 flex flex-wrap md:flex-nowrap items-stretch md:justify-between justify-center gap-6">
