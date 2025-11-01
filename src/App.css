@@ -67,6 +67,8 @@
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(270deg,#FA7C0B 0%,#071A2C 70%);
+  /* Allow clicks to pass through the decorative border overlay */
+  pointer-events: none;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
