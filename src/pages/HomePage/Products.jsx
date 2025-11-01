@@ -21,7 +21,7 @@ function Products() {
           </h2>
           <div className="flex gap-4 mt-4 px-4 ">
 
-            <div className="p-6 pt-20 relative rounded-4xl before:p-0.5! max-w-[380px] border-gradiant-no-bg ">
+            <div className="p-6 pt-20 relative rounded-4xl before:p-0.5! max-w-[380px] border-gradiant-no-bg transition-all">
               <div className="text-white relative z-10!">
                 <h2 className="font-bold text-4xl">Riciety</h2>
                 <h3 className="mt-2 text-3xl font-semibold">

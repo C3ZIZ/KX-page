@@ -77,7 +77,7 @@ function StartHere({ formAction = FORM_ACTION, className = "" }) {
 
         <h2 className="mt-4 text-4xl/12 font-bold text-white">From Discovery to Market</h2>
 
-        <p className="mt-3 text-4xl/13 text-white z-10 ">
+        <p className=" text-4xl/12 text-white z-10 ">
           Explore a preview of SPINx — a light version designed to show how we assess the commercial
           readiness of your research in minutes.
         </p>
