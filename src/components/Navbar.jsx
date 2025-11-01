@@ -49,18 +49,12 @@ function Navbar({ active = "about" }) {
   // NOTE: JSX markup & classNames are preserved; only organized in the code file.
   return (
     <div className="w-[1204px]">
-      {/* Border/Nav gradient outline */}
-      <div
-  className="rounded-[40px] p-px"
-        style={{
-          background:
-            "linear-gradient(94deg, #071A2C 24.12%, #FA7C0B 95.13%)",
-        }}
-      >
-        {/* Inner: exact height/padding, blur, solid border, Gredeint/01 bg */}
+      {/* Border/Nav gradient outline: use the same border class as Header for consistent styling */}
+      <div className="rounded-[40px] p-px border-2-gradiant">
+        {/* Inner: exact height/padding, blur, keep same inner background (no solid border) */}
         <div
           className="rounded-[40px] h-[76px] pt-5 pb-[18px] px-9 flex items-center justify-between backdrop-blur-[2px]"
-          style={{ border: `1px solid ${BORDER_COLOR}`, background: INNER_BG }}
+          style={{ background: INNER_BG }}
         >
           {/* Brand */}
           <div className="text-[23px] leading-[1.4] font-semibold text-[#FDF3E8] font-['IBM Plex Sans']">
