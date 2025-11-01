@@ -1,4 +1,12 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 5px white, 0 0 10px #FA7C0B, 0 0 20px #FA7C0B, 0 0 40px #FA7C0B;
+  }
+}
+
+
 /* border1 */
 .border-gradiant {
   position: relative;
@@ -58,7 +66,49 @@
   inset: 0px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(270deg,#FA7C0B 0%,#071A2C 70%);;
+  background: linear-gradient(270deg,#FA7C0B 0%,#071A2C 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* border 3 gradiant */
+.border-3-gradiant {
+  position: relative;
+  background: linear-gradient(90deg,#170D02 0%,#071A2Ccf 70%) padding-box;
+  border-radius: 120px;
+  z-index: 10;
+}
+ 
+.border-3-gradiant::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(22deg,#FA7C0B 50%,#000 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* border-gradiant-no-bg */
+.border-gradiant-no-bg {
+  position: relative;
+  z-index: 10;
+}
+ 
+.border-gradiant-no-bg::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from 30deg at 50% 15%,#9DE8EE 0deg,#9DE8EE 50deg,#FA7C0B 90deg,#9F8CED 140deg,#9F8CED 230deg,#FA7C0B 220deg,#9DE8EE 260deg);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
