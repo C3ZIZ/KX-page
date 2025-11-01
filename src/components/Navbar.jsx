@@ -1,11 +1,9 @@
 // src/components/Navbar.jsx
-// Purpose: Top navigation bar with brand, primary links, and two SVG CTA buttons.
+// Purpose: Top navigation bar with brand, primary links, and two CTA buttons.
 // Notes: keeps layout/styling intact; only structure/organization + comments.
 
 import React from "react";
 import { Link } from "react-router-dom";
-import contactBtn from "../assets/buttons/ContactUsButton.svg";
-import kxBtn from "../assets/buttons/KxAcademyButton.svg";
 
 // ------------------------------ Constants & Types ------------------------------
 // Keep constants near top; name in ALL_CAPS if static.
@@ -66,7 +64,7 @@ function Navbar({ active = "about" }) {
         >
           {/* Brand */}
           <div className="text-[23px] leading-[1.4] font-semibold text-[#FDF3E8] font-['IBM Plex Sans']">
-            Knowledgex
+            KnowledgeX
           </div>
 
           {/* Links */}
@@ -93,26 +91,28 @@ function Navbar({ active = "about" }) {
             </ul>
           </nav>
 
-          {/* Right CTAs (SVGs only) */}
-          <div className="flex items-center gap-3">
+          {/* Right CTAs (Styled buttons) */}
+          <div className="flex items-center gap-4">
             <a
               href="#contact"
               aria-label="Contact us"
               title="Contact us"
-              className="cursor-pointer inline-flex"
             >
-              <img src={contactBtn} alt="" className="h-10 w-auto select-none" />
-              <span className="sr-only">Contact us</span>
+              <button className="cursor-pointer px-7 py-2.5 rounded-full text-white font-medium border-gradiant">
+                Contact us
+              </button>
             </a>
 
             <Link
               to="/academy"
               aria-label="KX Academy"
               title="KX Academy"
-              className="cursor-pointer inline-flex"
             >
-              <img src={kxBtn} alt="" className="h-10 w-auto select-none" />
-              <span className="sr-only">KX Academy</span>
+              <div className="rounded-full p-[1.8px] max-w-max flex items-center justify-center bg-[linear-gradient(35deg,#ff8a2b_0%,#0b0f14_100%)] shadow-[0_10px_20px_rgba(0,0,0,0.35)]">
+                <button className="cursor-pointer relative inline-flex items-center justify-center px-6 py-2 rounded-full text-white font-semibold bg-[linear-gradient(200deg,#8a3c1f_0%,#3a271d_45%,#000_100%)]">
+                  <span className="relative">KX Academy</span>
+                </button>
+              </div>
             </Link>
           </div>
         </div>

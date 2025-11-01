@@ -1,14 +1,20 @@
 import React from 'react'
-import Hero from './Hero'
 import Footer from '../../../components/Footer'
-import AboutProductSection from './AboutProductSection'
-import Stakeholders from './stakeholders'
-import Advances from './Advances'
+import ProductHero from '../components/ProductHero'
+import AboutProductSection from '../components/AboutProductSection'
+import Stakeholders from '../components/Stakeholders'
+import Advances from '../components/Advances'
 
 function Riciety({ pageTitle = "Riciety" }) {
   return (
     <div className="w-full min-h-screen bg-[#071A2C] text-white overflow-x-hidden">
-      <Hero pageTitle={pageTitle} />
+      <ProductHero
+        title={pageTitle}
+        subtitle="Open Research Platform"
+        description="An open platform redefining collaboration in academia across universities and disciplines."
+        buttonLabel="Join Now"
+        buttonHref="#"
+      />
 
       {/* About product section (below the hero) */}
       <AboutProductSection
@@ -18,15 +24,50 @@ function Riciety({ pageTitle = "Riciety" }) {
           "It empowers Technology Transfer Offices (TTOs) to manage research challenges, engage alumni and industrial partners, and secure funding through donations, investments, and collaborations.",
           "For investors and donors, Riciety provides instant access to a curated pipeline of impactful research opportunities, open visibility in monitoring progress, quantifiable economic and social returns, and assurance every investment produces innovation with purpose and value."
         ]}
-        statNumber="10.203"
+        statNumber="10,000+"
         statLabel="Number of users"
       />
 
-      {/* Stakeholders section (use component DEFAULT_CARDS) */}
-      <Stakeholders />
+      {/* Stakeholders section */}
+      <Stakeholders
+        cards={[
+          {
+            title: "For Universities",
+            points: [
+              "Showcase active research.",
+              "Attract partners and funding.",
+              "Boost innovation reputation.",
+            ],
+          },
+          {
+            title: "For Researchers",
+            points: [
+              "Connect across institutions.",
+              "Collaborate with peers and alumni.",
+              "Gain visibility for your work.",
+            ],
+          },
+          {
+            title: "For Donors and Investors",
+            points: [
+              "See real opportunities early.",
+              "Fund impactful research.",
+              "Support innovation growth.",
+            ],
+          },
+        ]}
+      />
 
   {/* Advances section: how Riciety advances open research */}
-  <Advances />
+  <Advances 
+    title="How Riciety Advances Open Research"
+    points={[
+      "Builds bridges between researchers, institutions, and alumni.",
+      "Opens new channels for collaboration and shared discovery.",
+      "Promotes transparency in research progress and impact.",
+      "Gives funders the insight to invest where it matters most.",
+    ]}
+  />
 
       <Footer />
     </div>
