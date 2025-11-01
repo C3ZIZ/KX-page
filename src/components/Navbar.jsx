@@ -3,12 +3,7 @@
 // Notes: keeps layout/styling intact; only structure/organization + comments.
 
 import React from "react";
-// 1) External libs first (react, router, antd, etc.)
-
-// 2) Internal/shared utilities next
-// (none)
-
-// 3) Local sibling imports last
+import { Link } from "react-router-dom";
 import contactBtn from "../assets/buttons/ContactUsButton.svg";
 import kxBtn from "../assets/buttons/KxAcademyButton.svg";
 
@@ -57,7 +52,13 @@ function Navbar({ active = "about" }) {
   return (
     <div className="w-[1204px]">
       {/* Border/Nav gradient outline */}
-      <div className="rounded-[40px] p-[1px]" style={{ background: OUTLINE_GRAD }}>
+      <div
+  className="rounded-[40px] p-px"
+        style={{
+          background:
+            "linear-gradient(94deg, #071A2C 24.12%, #FA7C0B 95.13%)",
+        }}
+      >
         {/* Inner: exact height/padding, blur, solid border, Gredeint/01 bg */}
         <div
           className="rounded-[40px] h-[76px] pt-5 pb-[18px] px-9 flex items-center justify-between backdrop-blur-[2px]"
@@ -75,8 +76,8 @@ function Navbar({ active = "about" }) {
                 const isActive = active === l.key;
                 return (
                   <li key={l.key}>
-                    <a
-                      href="#"
+                    <Link
+                      to={l.key === "about" ? "/about" : `/${l.key}`}
                       className={[
                         "text-[15px] leading-none transition-colors font-['IBM Plex Sans']",
                         isActive
@@ -85,7 +86,7 @@ function Navbar({ active = "about" }) {
                       ].join(" ")}
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}
@@ -104,15 +105,15 @@ function Navbar({ active = "about" }) {
               <span className="sr-only">Contact us</span>
             </a>
 
-            <a
-              href="#academy"
+            <Link
+              to="/academy"
               aria-label="KX Academy"
               title="KX Academy"
               className="cursor-pointer inline-flex"
             >
               <img src={kxBtn} alt="" className="h-10 w-auto select-none" />
               <span className="sr-only">KX Academy</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

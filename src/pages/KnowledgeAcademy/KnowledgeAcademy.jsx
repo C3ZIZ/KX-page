@@ -6,7 +6,7 @@ export default function KnowledgeAcademy() {
   return (
     <div className="w-full bg-[#071A2C] text-white overflow-x-hidden">
       {/* Top nav (centered to match your 1204px navbar width) */}
-      <div className="w-full flex justify-center pt-6">
+      <div className="w-full flex justify-center pt-12">
         <Navbar active="about" />
       </div>
 
